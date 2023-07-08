@@ -12,7 +12,7 @@ const FoodProvider = ({ children }) => {
     const filteredCuisines = restaurants.filter(restaurant => restaurant.cuisine_id === selectedCuisine)
 
     const findRestaurent = (id) => {
-        return restaurants.find(restaurant => restaurant.id === id);
+        return restaurants.find(restaurant => restaurant.id === Number(id));
     }
 
     return (
