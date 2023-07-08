@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css'
 
 function App() {
@@ -11,6 +11,8 @@ function App() {
       <h1 className="text-3xl font-bold underline">
         Hello world!
       </h1>
+      <AccessAlarmIcon />
+
     </>
   )
 }
