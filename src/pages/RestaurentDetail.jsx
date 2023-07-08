@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import { useGlobalFood } from '../contexts/food-context';
+import CommentBox from '../components/CommentBox';
 
 function RestaurentDetail() {
+    const [isCommentOpen, setIsCommentOpen] = useState(false)
     const { id } = useParams();
     const { findRestaurent } = useGlobalFood()
     const restaurent = findRestaurent(id);
@@ -17,9 +19,9 @@ function RestaurentDetail() {
                 <ArrowBackIcon fontSize='large' /> back to home
             </div>
             <div className='w-[100%] flex justify-center mt-5'>
-                <button className='bg-cyan-800 text-white flex p-3 rounded-lg justify-end'>Add review</button>
+                <button className='bg-cyan-800 text-white flex p-3 rounded-lg justify-end' onClick={() => setIsCommentOpen(!isCommentOpen)}>Add review</button>
             </div>
-            <div className="details flex flex-col justify-center  p-3 items-center bg-cyan-100 w-[100%] mt-5">
+            <div className="details flex flex-col justify-center  p-3 items-center  w-[100%] mt-5">
                 <h1 className='text-3xl'>{restaurent.name}</h1>
                 <div className='flex gap-1 justify-start items-start'>
                     {
@@ -34,6 +36,9 @@ function RestaurentDetail() {
                 <div className="reviews">
                     <h1 className='text-2xl font-bold p-5'>Reviews</h1>
                     {
+                        isCommentOpen && <CommentBox />
+                    }
+                    {
                         restaurent.ratings.map((item) =>
                             <div className="menu">
                                 <div className='flex gap-2 p-5'>
@@ -41,7 +46,7 @@ function RestaurentDetail() {
                                     <h1>{item.revName}</h1>
                                 </div>
                                 <h1>{item.comment}</h1>
-                                <hr />
+                                <hr className='h-1' />
                             </div>
                         )
                     }
