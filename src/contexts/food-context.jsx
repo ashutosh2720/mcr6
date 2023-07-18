@@ -14,9 +14,15 @@ const FoodProvider = ({ children }) => {
         return restaurants.find(restaurant => restaurant.id === Number(id));
     }
 
+    const commentHandler = (comment, restaurantId) => {
+        setRestaurants(prevState => prevState.map(
+            restaurant => restaurant.id === restaurantId ? { ...restaurant, ratings: [comment, ...restaurant.ratings] } : restaurant
+        ))
+    }
+
     return (
         <foodContext.Provider
-            value={{ filteredCuisines, findRestaurent, restaurants, cuisines, selectedCuisine, setSelectedCuisine }}
+            value={{ filteredCuisines, findRestaurent, restaurants, cuisines, selectedCuisine, setSelectedCuisine, commentHandler }}
         >
             {children}
         </foodContext.Provider>
